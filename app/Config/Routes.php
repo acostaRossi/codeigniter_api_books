@@ -32,17 +32,21 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('', 'Home::index');
 
-$routes->get('books', 'Home::index');
+$routes->group('', ['filter' => 'login'], function($routes)
+{
+	$routes->get('/', 'Home::index');
 
-$routes->get('books/new', 'Home::new');
+	$routes->get('books', 'Home::index');
 
-$routes->put('books/create', 'Home::create');
+	$routes->put('books/create', 'Home::create');
 
-$routes->get('books/(:any)', 'Home::edit/$1');
+	$routes->get('books/new', 'Home::new');
 
-$routes->post('books/(:any)', 'Home::update/$1');
+	$routes->get('books/(:any)', 'Home::edit/$1');
+
+	$routes->post('books/(:any)', 'Home::update/$1');
+});
 
 $routes->group('api', function($routes)
 {
