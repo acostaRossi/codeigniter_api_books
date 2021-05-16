@@ -3,6 +3,9 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseService;
+use Myth\Auth\Entities\User;
+use CodeIgniter\HTTP\IncomingRequest;
+use \Firebase\JWT\JWT;
 
 /**
  * Services Configuration file.
@@ -19,13 +22,27 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-	// public static function example($getShared = true)
-	// {
-	//     if ($getShared)
-	//     {
-	//         return static::getSharedInstance('example');
-	//     }
-	//
-	//     return new \CodeIgniter\Example();
-	// }
+	public static function getSecretKey()
+	{
+		return 'G-KaPdSgVkYp3s5v8y/B?E(H+MbQeThWmZq4t7w9z$C&F)J@NcRfUjXn2r5u8x/A'; // 512 bit key -> 64 caratteri
+	}
+
+	public static function getUserFromJWT(IncomingRequest $request)
+	{
+		$key = Services::getSecretKey();
+
+		$authHeader = $request->getServer('HTTP_AUTHORIZATION');
+
+		$arr = explode(' ', $authHeader);
+
+		$token = $arr[1];
+
+		$decoded = JWT::decode($token, $key, ['HS256 ']);
+
+		$userModel = new \Myth\Auth\Models\UserModel();
+
+		$user = $userModel->find($decoded->userId);
+
+		return $user;
+	}
 }

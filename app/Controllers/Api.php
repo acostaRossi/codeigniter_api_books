@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
+use Config\Services;
 
 class Api extends BaseController
 {
@@ -10,6 +11,8 @@ class Api extends BaseController
     
 	public function index()
 	{
+		//$user = Services::getUserFromJWT($this->request);
+
 		$db = db_connect();
 
 		$query = $db->query('SELECT * FROM books');

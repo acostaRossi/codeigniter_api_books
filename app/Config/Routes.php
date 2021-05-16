@@ -50,15 +50,20 @@ $routes->group('', ['filter' => 'login'], function($routes)
 
 $routes->group('api', function($routes)
 {
-    $routes->get('books', 'Api::index');
+	$routes->post('auth', 'ApiAuth::authenticate');
 
-    $routes->get('books/(:any)', 'Api::edit/$1');
+	$routes->group('', ['filter' => 'jwt'], function($routes)
+	{
+	    $routes->get('books', 'Api::index');
 
-    $routes->put('books/create', 'Api::create');
+	    $routes->get('books/(:any)', 'Api::edit/$1');
 
-    $routes->post('books/(:any)', 'Api::update/$1');
+	    $routes->put('books/create', 'Api::create');
 
-    $routes->delete('books/(:any)', 'Api::delete/$1');
+	    $routes->post('books/(:any)', 'Api::update/$1');
+
+	    $routes->delete('books/(:any)', 'Api::delete/$1');
+    });
 });
 
 /*
