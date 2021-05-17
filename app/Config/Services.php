@@ -37,7 +37,7 @@ class Services extends BaseService
 
 		$token = $arr[1];
 
-		$decoded = JWT::decode($token, $key, ['HS256 ']);
+		$decoded = JWT::decode($token, $key, ['HS256']);
 
 		$userModel = new \Myth\Auth\Models\UserModel();
 

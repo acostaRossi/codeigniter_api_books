@@ -44,13 +44,13 @@ class ApiAuth extends BaseController
 		    'iat'  => $issuedAt->getTimestamp(), // Issued at
 		    'iss'  => $this->serverName, // Issuer
 		    'nbf'  => $issuedAt->getTimestamp(), // Not before
-		    'exp'  => $issuedAt->addMinutes(2)->getTimestamp(), // Expire
+		    'exp'  => $issuedAt->addMinutes(60)->getTimestamp(), // Expire
 		    'userId' => $user->id, // User ID
 		    'userName' => $user->username, // User Name
 		    'userEmail' => $user->email, // User Email
 		];
 		
-		$jwt = JWT::encode($data, $this->secretKey, 'HS512');
+		$jwt = JWT::encode($data, $this->secretKey, 'HS256');
 
 		return $this->respond($jwt, 200);
 	}
