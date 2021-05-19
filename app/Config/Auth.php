@@ -20,19 +20,19 @@ class Auth extends \Myth\Auth\Config\Auth
     //--------------------------------------------------------------------
 
     public $views = [
-        'login' => 'Myth\Auth\Views\login',
-        'register' => 'Myth\Auth\Views\register',
-        'forgot' => 'Myth\Auth\Views\forgot',
-        'reset' => 'Myth\Auth\Views\reset',
-        'emailForgot' => 'Myth\Auth\Views\emails\forgot',
-        'emailActivation' => 'Myth\Auth\Views\emails\activation',
+        'login' => 'App\Views\auth\login',
+        'register' => 'App\Views\auth\register',
+        'forgot' => 'App\Views\auth\forgot',
+        'reset' => 'App\Views\auth\reset',
+        'emailForgot' => 'App\Views\auth\emails\forgot',
+        'emailActivation' => 'App\Views\auth\emails\activation',
     ];
 
     //--------------------------------------------------------------------
     // Layout for the views to extend
     //--------------------------------------------------------------------
 
-    public $viewLayout = 'Myth\Auth\Views\layout';
+    public $viewLayout = 'App\Views\auth\layout';
 
     //--------------------------------------------------------------------
     // Authentication
