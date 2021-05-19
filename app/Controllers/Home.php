@@ -17,6 +17,19 @@ class Home extends BaseController
 		return view('home', compact('title', 'res'));
 	}
 
+	public function list()
+	{
+		$title = 'Books';
+
+		$db = db_connect();
+
+		$query = $db->query('SELECT * FROM books');
+
+		$res = $query->getResult();
+
+		return view('list', compact('title', 'res'));
+	}
+
 	public function edit($isbn)
 	{
 		$title = 'Edit Book';

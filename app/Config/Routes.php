@@ -39,6 +39,8 @@ $routes->group('', ['filter' => 'login'], function($routes)
 
 	$routes->get('books', 'Home::index');
 
+	$routes->get('books/list', 'Home::list');
+
 	$routes->put('books/create', 'Home::create');
 
 	$routes->get('books/new', 'Home::new');
