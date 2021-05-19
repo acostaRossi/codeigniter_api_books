@@ -52,6 +52,8 @@ $routes->group('api', function($routes)
 {
 	$routes->post('auth', 'ApiAuth::authenticate');
 
+	$routes->post('register', 'ApiAuth::attemptRegister');
+
 	$routes->group('', ['filter' => 'jwt'], function($routes)
 	{
 	    $routes->get('books', 'Api::index');
